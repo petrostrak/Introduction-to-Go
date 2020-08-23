@@ -3,8 +3,14 @@ package main
 import "fmt"
 
 func main() {
-	// var card string = "Ace of Spades!"
-	card := "Ace of Spades!"
+	cards := []string{"Ace of Spades", newCard()}
+	cards = append(cards, "Ace of Hearts") // append doesn't modify the current slice, instead it returns a new one
 
-	fmt.Println(card)
+	for i, card := range cards {
+		fmt.Println(i, card)
+	}
+}
+
+func newCard() string {
+	return "Five of Diamonds"
 }
