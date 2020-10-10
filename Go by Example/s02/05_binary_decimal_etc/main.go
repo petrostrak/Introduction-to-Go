@@ -1,6 +1,3 @@
-// File name: ...\s02\05_binary_decimal_etc\main.go
-// Course Name: Go (Golang) Programming by Example (by Kam Hojati)
-
 package main
 
 import (

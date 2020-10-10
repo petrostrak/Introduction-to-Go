@@ -1,6 +1,3 @@
-// File name: ...\s02\02_types_variables\main.go
-// Course Name: Go (Golang) Programming by Example (by Kam Hojati)
-
 package main
 
 import (

@@ -1,6 +1,3 @@
-// File name: ...\s02\08_string\main.go
-// Course Name: Go (Golang) Programming by Example (by Kam Hojati)
-
 package main
 
 import "fmt"
