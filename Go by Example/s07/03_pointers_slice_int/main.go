@@ -1,6 +1,3 @@
-// File name: ...\s07\03_pointers_slice_int\main.go
-// Course Name: Go (Golang) Programming by Example (by Kam Hojati)
-
 package main
 
 import "fmt"
