@@ -36,4 +36,16 @@ func main() {
 	}
 
 	fmt.Println("P2 :", p2)
+
+	p3 := player{
+		name:  "Giannis Lio",
+		age:   33,
+		sport: "Dota2",
+		info: generalInfo{
+			country:   "Greece",
+			hairColor: "No hair",
+		},
+	}
+
+	fmt.Println("P3 :", p3)
 }
