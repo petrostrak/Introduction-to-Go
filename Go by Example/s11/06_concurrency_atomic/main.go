@@ -42,7 +42,7 @@ func numbers(callID int) {
 		time.Sleep(200 * time.Millisecond)
 
 		atomic.AddUint64(&counter, 1)
-		fmt.Printf("(%d) %d %d\n", callID, randInt(20)+20, atomic.LoadUint64(&counter))
+		fmt.Printf("(%d) %d %d\n", callID, randInt(20)+20), atomic.LoadUint64(&counter))
 	}
 	waitG.Done()
 }
