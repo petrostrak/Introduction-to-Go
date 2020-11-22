@@ -1,8 +1,7 @@
 /*
-Race Condition happens when more than one process tries to
-access the same resource.
-> go run -race main.go (to find possible race conditions)
-it prints the results, and gives some information about the race.
+Mutual Exclusion is a lock mechanism that is locking a portion
+of our code so that two running processes cannot access that
+portion of code at the same time.
 */
 package main
 
@@ -15,6 +14,7 @@ import (
 
 var waitG sync.WaitGroup
 var counter = 0
+var m sync.Mutex
 
 func main() {
 	waitG.Add(2)
@@ -28,13 +28,12 @@ func main() {
 func numbers(callID int) {
 	rand.Seed(time.Now().UnixNano())
 	for i := 1; i <= 10; i++ {
-		// tmpCounter := counter
-		// tmpCounter++
-		counter++
 		time.Sleep(200 * time.Millisecond)
-		// counter = tmpCounter
 
+		m.Lock()
+		counter++
 		fmt.Printf("(%d) %d %d\n", callID, rand.Intn(20)+20, counter)
+		m.Unlock()
 	}
 	waitG.Done()
 }
