@@ -18,7 +18,10 @@
 //* Liberal use of type aliases, structs, and maps will help organize this project
 package main
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 type Title string
 type Name string
@@ -41,6 +44,19 @@ type BookEntry struct {
 type Library struct {
 	member map[Name]Member
 	books  map[Title]BookEntry
+}
+
+func printMemberAudit(member *Member) {
+	for title, audit := range member.books {
+		var returnTime string
+		if audit.checkIn.IsZero() {
+			returnTime = "[not returned yet]"
+		} else {
+			returnTime = audit.checkIn.String()
+		}
+
+		fmt.Println(member.name, ":", title, ":", audit.checkOut.String(), "through", returnTime)
+	}
 }
 
 func main() {
