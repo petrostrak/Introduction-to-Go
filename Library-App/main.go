@@ -59,6 +59,12 @@ func printMemberAudit(member *Member) {
 	}
 }
 
+func printLibraryAudit(library *Library) {
+	for _, member := range library.member {
+		printMemberAudit(&member)
+	}
+}
+
 func main() {
 
 }
