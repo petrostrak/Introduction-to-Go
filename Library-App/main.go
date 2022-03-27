@@ -42,8 +42,8 @@ type BookEntry struct {
 }
 
 type Library struct {
-	member map[Name]Member
-	books  map[Title]BookEntry
+	members map[Name]Member
+	books   map[Title]BookEntry
 }
 
 func printMemberAudit(member *Member) {
@@ -59,8 +59,8 @@ func printMemberAudit(member *Member) {
 	}
 }
 
-func printLibraryAudit(library *Library) {
-	for _, member := range library.member {
+func printMemberAudits(library *Library) {
+	for _, member := range library.members {
 		printMemberAudit(&member)
 	}
 }
@@ -114,5 +114,51 @@ func returnBook(library *Library, title Title, member *Member) bool {
 }
 
 func main() {
+	library := Library{
+		books:   make(map[Title]BookEntry),
+		members: make(map[Name]Member),
+	}
+	//  - Add at least 4 books...
+	library.books["Webapps in Go"] = BookEntry{
+		total:  4,
+		lended: 0,
+	}
+	library.books["The Little Go Book"] = BookEntry{
+		total:  3,
+		lended: 0,
+	}
+	library.books["Let's learn Go"] = BookEntry{
+		total:  2,
+		lended: 0,
+	}
+	library.books["Go Bootcamp"] = BookEntry{
+		total:  1,
+		lended: 0,
+	}
+	//  ... and at least 3 members to the library
+	library.members["Jayson"] = Member{"Jayson", make(map[Title]LendAudit)}
+	library.members["Billy"] = Member{"Billy", make(map[Title]LendAudit)}
+	library.members["Susanna"] = Member{"Susanna", make(map[Title]LendAudit)}
 
+	fmt.Println("\nInitial:")
+	//  - Print out initial library information, and after each change
+	printLibraryBooks(&library)
+	printMemberAudits(&library)
+
+	//  - Check out a book
+	member := library.members["Jayson"]
+	checkedOut := checkoutBook(&library, "Go Bootcamp", &member)
+	fmt.Println("\nCheck out a book:")
+	if checkedOut {
+		printLibraryBooks(&library)
+		printMemberAudits(&library)
+	}
+
+	//  - Check in a book
+	returned := returnBook(&library, "Go Bootcamp", &member)
+	fmt.Println("\nCheck in a book:")
+	if returned {
+		printLibraryBooks(&library)
+		printMemberAudits(&library)
+	}
 }
