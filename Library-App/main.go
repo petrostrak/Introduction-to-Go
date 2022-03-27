@@ -73,6 +73,25 @@ func printLibraryBooks(library *Library) {
 	fmt.Println()
 }
 
+func checkoutBook(library *Library, title Title, member *Member) bool {
+	book, found := library.books[title]
+	if !found {
+		fmt.Println("Book not part of the Library")
+		return false
+	}
+
+	if book.lended == book.total {
+		fmt.Println("No more books available to lend")
+		return false
+	}
+
+	book.lended += 1
+	library.books[title] = book
+
+	member.books[title] = LendAudit{checkOut: time.Now()}
+	return true
+}
+
 func main() {
 
 }
