@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"golang.org/x/exp/constraints"
+)
 
 // sumInts adds together the values of m.
 func sumInts(m map[string]int64) int64 {
@@ -46,6 +50,18 @@ func sumOfArray[V Number](arr []V) V {
 	return s
 }
 
+type Point []int32
+
+// scale returns a copy of s with each element multiplied by c.
+func scale[S ~[]E, E constraints.Integer](s S, c E) S {
+	r := make(S, len(s))
+	for i, v := range s {
+		r[i] = v * c
+	}
+
+	return r
+}
+
 func main() {
 	// Initialize a map for the integer values
 	ints := map[string]int64{
@@ -76,4 +92,9 @@ func main() {
 	fmt.Printf("Generic Sums: %v and %v\n",
 		sumOfArray(intArr),
 		sumOfArray(intFloat))
+
+	arr := []int8{1, 3, 5, 6, 9}
+
+	fmt.Printf("Generic scale: %v\n",
+		scale(arr, 2))
 }
