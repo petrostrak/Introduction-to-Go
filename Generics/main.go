@@ -37,6 +37,15 @@ func sumIntsOrFloats[K comparable, V Number](m map[K]V) V {
 	return s
 }
 
+func sumOfArray[V Number](arr []V) V {
+	var s V
+	for _, v := range arr {
+		s += v
+	}
+
+	return s
+}
+
 func main() {
 	// Initialize a map for the integer values
 	ints := map[string]int64{
@@ -50,6 +59,12 @@ func main() {
 		"second": 26.99,
 	}
 
+	// Initialize an array of int64
+	intArr := []int64{2, 4, 6, 8}
+
+	// Initialize an array of float64
+	intFloat := []float64{23.43, 55.92, 11.32, 84.60}
+
 	fmt.Printf("Non-Generic Sums: %v and %v\n",
 		sumInts(ints),
 		sumFloats(floats))
@@ -57,4 +72,8 @@ func main() {
 	fmt.Printf("Generic Sums: %v and %v\n",
 		sumIntsOrFloats(ints),
 		sumIntsOrFloats(floats))
+
+	fmt.Printf("Generic Sums: %v and %v\n",
+		sumOfArray(intArr),
+		sumOfArray(intFloat))
 }
